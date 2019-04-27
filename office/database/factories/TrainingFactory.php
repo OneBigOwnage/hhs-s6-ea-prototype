@@ -11,7 +11,6 @@ $factory->define(Training::class, function (Faker $faker) {
     return [
         'ship_id' => factory(Ship::class)->lazy(),
         'concept_id' => factory(TrainingConcept::class)->lazy(),
-        'communication_id' => $faker->uuid,
         'title' => function ($training) {
             return TrainingConcept::find($training['concept_id'])->title;
         },
