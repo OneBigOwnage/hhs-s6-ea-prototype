@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::view('/dashboard', 'dashboard');
+
 Route::get('/ships', 'ShipController@index');
 Route::get('/concepts', 'TrainingConceptController@index');
 Route::get('/trainings', 'TrainingController@index');
