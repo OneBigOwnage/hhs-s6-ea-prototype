@@ -12,6 +12,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(TrainingConcept::class, 20)->state('withInstances')->create();
+        factory(TrainingConcept::class, 5)->state('withInstances')->create();
     }
 }
