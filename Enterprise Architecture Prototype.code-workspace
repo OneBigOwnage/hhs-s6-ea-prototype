@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "./ship",
+			"name": "Ship application"
+		}, {
+			"path": "./office",
+			"name": "Office application"
+		}
+	],
+	"settings": {}
+}
