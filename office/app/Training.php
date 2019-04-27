@@ -18,12 +18,26 @@ use Ramsey\Uuid\Uuid;
  */
 class Training extends Model
 {
+    protected $casts = [
+        'date' => 'datetime'
+    ];
+
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function (self $training) {
-            $training->communication_id = Uuid::uuid4();
+            $training->communication_id = strtoupper(Uuid::uuid4());
         });
+    }
+
+    public function ship()
+    {
+        return $this->belongsTo(Ship::class);
+    }
+
+    public function concept()
+    {
+        return $this->belongsTo(TrainingConcept::class);
     }
 }

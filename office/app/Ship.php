@@ -17,7 +17,12 @@ class Ship extends Model
         parent::boot();
 
         static::creating(function (self $ship) {
-            $ship->unique_identifier = Uuid::uuid4();
+            $ship->unique_identifier = strtoupper(Uuid::uuid4());
         });
+    }
+
+    public function trainings()
+    {
+        return $this->hasMany(Training::class);
     }
 }
