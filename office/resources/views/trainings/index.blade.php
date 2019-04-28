@@ -12,10 +12,7 @@
     <div class="col-md-10 col-md-offset-1">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Trainings</h3>
-          <div  class="pull-right">
-            <button type="button" class="btn btn-block btn-success btn-xs">New</button>
-          </div>
+          <a href="/trainings/create" class="btn btn-success btn-xs">New</a>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-striped">
