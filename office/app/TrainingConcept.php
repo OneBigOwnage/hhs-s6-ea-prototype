@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TrainingConcept extends Model
 {
+    protected $guarded = [];
+
     public function instances()
     {
         return $this->hasMany(Training::class);

@@ -18,6 +18,8 @@ use Ramsey\Uuid\Uuid;
  */
 class Training extends Model
 {
+    protected $guarded = [];
+
     protected $casts = [
         'date' => 'datetime'
     ];

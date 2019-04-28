@@ -12,6 +12,8 @@ use Ramsey\Uuid\Uuid;
  */
 class Ship extends Model
 {
+    protected $guarded = [];
+
     protected static function boot()
     {
         parent::boot();
