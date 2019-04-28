@@ -18,10 +18,11 @@
             <table class="table table-bordered table-striped">
               <tbody><tr>
                 <th style="width: 10px">#</th>
-                <th>Title</th>
+                <th>Training</th>
                 <th>Ship</th>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Feedback</th>
               </tr>
 
               @foreach ($trainings as $training)
@@ -36,6 +37,8 @@
                     @else
                     <td><span class="badge bg-red">Not done</span></td>
                   @endif
+
+                  <td>{{ $training->feedback ?? '-' }}</td>
 
                 </tr>
               @endforeach
