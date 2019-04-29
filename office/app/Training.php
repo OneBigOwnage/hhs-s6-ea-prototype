@@ -31,8 +31,8 @@ class Training extends Model
      * @var array
      */
     protected $casts = [
-        'date' => 'datetime',
-        'is_done' => 'bool'
+        'date'    => 'datetime',
+        'is_done' => 'bool'    ,
     ];
 
     /**
