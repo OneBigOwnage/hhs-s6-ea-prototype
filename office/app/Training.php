@@ -21,7 +21,8 @@ class Training extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'date' => 'datetime'
+        'date' => 'datetime',
+        'is_done' => 'bool'
     ];
 
     protected static function boot()
