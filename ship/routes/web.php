@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::view('/dashboard', 'dashboard');
+
+Route::get('/sync', 'CommunicationController@sync');
+
+Route::prefix('/trainings')->group(function () {
+    Route::get('/', 'TrainingController@index');
+    Route::get('/{training}', 'TrainingController@show');
+    Route::get('/{training}/complete', 'TrainingController@showComplete');
+    Route::post('/{training}/complete', 'TrainingController@complete');
+});
