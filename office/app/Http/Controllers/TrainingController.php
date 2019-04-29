@@ -7,7 +7,6 @@ use App\Training;
 use App\TrainingConcept;
 use App\Ship;
 use Illuminate\Support\Carbon;
-use App\CommunicationServiceContract;
 
 class TrainingController extends Controller
 {
@@ -27,7 +26,7 @@ class TrainingController extends Controller
             ->with('concepts', $concepts);
     }
 
-    public function store(Request $request, CommunicationServiceContract $service)
+    public function store(Request $request)
     {
         $attributes = $request->validate([
             'ship_id' => 'required|int|exists:ships,id',
@@ -44,10 +43,7 @@ class TrainingController extends Controller
             'instructions' => $concept->instructions,
         ];
 
-        $training = Training::create(array_merge($attributes, $autoAttributes));
-        $ship     = Ship::find($request->ship_id);
-
-        $service->add($ship, $training);
+        Training::create(array_merge($attributes, $autoAttributes));
 
         return redirect('/trainings');
     }
