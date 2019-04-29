@@ -111,12 +111,12 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'dashboard',
-            'icon'        => 'tachometer',
+            'icon'        => 'tachometer-alt',
         ],
         [
             'text'        => 'Trainings',
             'url'         => 'trainings',
-            'icon'        => 'calendar',
+            'icon'        => 'calendar-alt',
         ],
     ],
 
