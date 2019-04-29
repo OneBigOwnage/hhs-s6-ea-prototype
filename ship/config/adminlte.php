@@ -109,14 +109,9 @@ return [
 
     'menu' => [
         [
-            'text' => 'Ships',
-            'url'  => 'ships',
-            'icon' => 'ship',
-        ],
-        [
-            'text'        => 'Library',
-            'url'         => 'concepts',
-            'icon'        => 'book',
+            'text'        => 'Dashboard',
+            'url'         => 'dashboard',
+            'icon'        => 'tachometer',
         ],
         [
             'text'        => 'Trainings',
