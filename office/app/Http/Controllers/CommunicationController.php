@@ -30,6 +30,8 @@ class CommunicationController extends Controller
             ->where('is_done', false)
             ->get();
 
+        $newlyReceived = 0;
+
         foreach ($trainings as $training) {
             $feedback = $incomingTrainings->firstWhere('communication_id', $training->communication_id)['feedback'];
 
@@ -37,7 +39,11 @@ class CommunicationController extends Controller
             $training->feedback = $feedback;
 
             $training->save();
+
+            $newlyReceived++;
         }
+
+        return [ 'newlyReceived' => $newlyReceived];
     }
 
     protected function ship($identifier)
