@@ -11,6 +11,10 @@ class CommunicationService implements CommunicationServiceContract
 
     protected $client;
 
+    protected $receivedCount = 0;
+
+    protected $sentCount = 0;
+
     public function __construct(Client $client) {
         $this->client= $client;
     }
@@ -40,6 +44,8 @@ class CommunicationService implements CommunicationServiceContract
                 'instructions'     => $attributes->instructions    ,
                 'date'             => $attributes->date            ,
             ]);
+
+            $this->receivedCount++;
         }
     }
 
@@ -48,6 +54,16 @@ class CommunicationService implements CommunicationServiceContract
         $this->sendFeedback(
             $this->pending()
         );
+    }
+
+    public function receivedCount()
+    {
+        return $this->receivedCount;
+    }
+
+    public function sentCount()
+    {
+        return $this->sentCount;
     }
 
     protected function trainingExists($communicationID)
@@ -71,9 +87,13 @@ class CommunicationService implements CommunicationServiceContract
             ];
         });
 
-        $this->client->post("/api/communication/{$identifier}", [
+        $response = $this->client->post("/api/communication/{$identifier}", [
             'json' => [ 'trainings' => $trainings->toArray() ]
         ]);
+
+        $response = json_decode($response->getBody());
+
+        $this->sentCount = $response->newlyReceived;
     }
 
 }

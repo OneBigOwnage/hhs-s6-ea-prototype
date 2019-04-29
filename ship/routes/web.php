@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/dashboard', 'dashboard');
+Route::get('/dashboard', 'Controller@dashboard');
 
 Route::get('/sync', 'CommunicationController@sync');
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Training;
+use Illuminate\Support\Facades\Cache;
 
 class TrainingController extends Controller
 {
@@ -29,6 +30,8 @@ class TrainingController extends Controller
         $training->is_done = true;
 
         $training->save();
+
+        Cache::increment('toSync');
 
         return redirect('/trainings');
     }
