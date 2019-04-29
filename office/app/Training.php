@@ -18,13 +18,28 @@ use Ramsey\Uuid\Uuid;
  */
 class Training extends Model
 {
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
         'date' => 'datetime',
         'is_done' => 'bool'
     ];
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
     protected static function boot()
     {
         parent::boot();
@@ -34,11 +49,21 @@ class Training extends Model
         });
     }
 
+    /**
+     * The ship that this training is to be performed on.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Ship
+     */
     public function ship()
     {
         return $this->belongsTo(Ship::class);
     }
 
+    /**
+     * The concept training from which this training originates.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|TrainingConcept
+     */
     public function concept()
     {
         return $this->belongsTo(TrainingConcept::class);

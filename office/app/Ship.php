@@ -12,8 +12,18 @@ use Ramsey\Uuid\Uuid;
  */
 class Ship extends Model
 {
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
     protected $guarded = [];
 
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
     protected static function boot()
     {
         parent::boot();
@@ -23,6 +33,11 @@ class Ship extends Model
         });
     }
 
+    /**
+     * All trainings for this barge.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|Training
+     */
     public function trainings()
     {
         return $this->hasMany(Training::class);
