@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use App\CommunicationServiceContract;
 use App\CommunicationService;
+use App\CommunicationServiceContract;
+
+use Illuminate\Support\ServiceProvider;
+
 use GuzzleHttp\Client;
 
 class AppServiceProvider extends ServiceProvider

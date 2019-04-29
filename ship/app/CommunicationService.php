@@ -7,24 +7,56 @@ use Illuminate\Support\Collection;
 
 class CommunicationService implements CommunicationServiceContract
 {
-    const CACHE_PREFIX = 'communication';
-
+    /**
+     * The HTTP Client that is used to contact the office API.
+     *
+     * @var Client
+     */
     protected $client;
 
-    protected $receivedCount = 0;
+    /**
+     * The amount of new trainings that have been received
+     * from the office in the current request cycle.
+     *
+     * @var int
+     */
+    protected static $receivedCount = 0;
 
-    protected $sentCount = 0;
+    /**
+     * The amount of trainings that have been sent
+     * to the office in the current request cycle.
+     *
+     * @var int
+     */
+    protected static $sentCount = 0;
 
+    /**
+     * Create a new instance.
+     *
+     * @param  Client $client HTTP Client.
+     *
+     * @return void
+     */
     public function __construct(Client $client) {
         $this->client= $client;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
     public function sync()
     {
         $this->receive();
         $this->send();
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
     public function receive()
     {
         $identifier = env('SHIP_IDENTIFIER');
@@ -45,10 +77,15 @@ class CommunicationService implements CommunicationServiceContract
                 'date'             => $attributes->date            ,
             ]);
 
-            $this->receivedCount++;
+            static::$receivedCount++;
         }
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
     public function send()
     {
         $this->sendFeedback(
@@ -56,26 +93,55 @@ class CommunicationService implements CommunicationServiceContract
         );
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return int
+     */
     public function receivedCount()
     {
-        return $this->receivedCount;
+        return static::$receivedCount;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return int
+     */
     public function sentCount()
     {
-        return $this->sentCount;
+        return static::$sentCount;
     }
 
+    /**
+     * Check if a training exists, with the given communication ID.
+     *
+     * @param  string $communicationID The unique communication ID used to check.
+     *
+     * @return bool True if a training with the given communication ID exists, false otherwise.
+     */
     protected function trainingExists($communicationID)
     {
         return Training::where('communication_id', $communicationID)->exists();
     }
 
+    /**
+     * Retrieve all trainings that could potentially not be sent to the office yet.
+     *
+     * @return Collection|Training
+     */
     protected function pending()
     {
         return Training::where('is_done', true)->get();
     }
 
+    /**
+     * Send a collection of completed trainings, including their feedback, to the office.
+     *
+     * @param  Collection $trainings The trainings that are to be sent.
+     *
+     * @return void
+     */
     protected function sendFeedback(Collection $trainings)
     {
         $identifier = env('SHIP_IDENTIFIER');
@@ -93,7 +159,6 @@ class CommunicationService implements CommunicationServiceContract
 
         $response = json_decode($response->getBody());
 
-        $this->sentCount = $response->newlyReceived;
+        static::$sentCount = $response->newlyReceived;
     }
-
 }
