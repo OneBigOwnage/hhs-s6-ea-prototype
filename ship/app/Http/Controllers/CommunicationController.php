@@ -7,12 +7,19 @@ use Illuminate\Support\Facades\Cache;
 
 class CommunicationController extends Controller
 {
-    public function sync(CommunicationServiceContract $service)
+    /**
+     * Synchronise the trainings with the office, then redirect back.
+     *
+     * @param CommunicationServiceContract $communicationService The communication service.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function sync(CommunicationServiceContract $communicationService)
     {
-        $service->sync();
+        $communicationService->sync();
 
-        $sent     = $service->sentCount();
-        $received = $service->receivedCount();
+        $sent     = $communicationService->sentCount();
+        $received = $communicationService->receivedCount();
 
         if ($sent < 1 && $received < 1) {
             $message = 'No trainings were communicated.';
