@@ -3,27 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\CommunicationServiceContract;
 use App\Ship;
 use App\Training;
 
 class CommunicationController extends Controller
 {
-    public function getPending($identifier, CommunicationServiceContract $service)
+    public function getPending($identifier)
     {
         $ship = $this->ship($identifier);
 
-        return $service->getPending($ship);
+        return Training::where('is_done', false)->where('ship_id', $ship->id)->get()->toJson();
     }
 
-    public function markSynced($identifier, Request $request, CommunicationServiceContract $service)
+    public function receiveFeedback($identifier, Request $request)
     {
         $ship = $this->ship($identifier);
 
-        $trainings = Training::whereIn('communication_id', $request->training_ids)->get();
+        $incomingTrainings = collect($request->trainings);
+
+        $trainingIDs = array_map(function ($training) {
+            return $training['communication_id'];
+        }, $request->trainings);
+
+        $trainings = Training::where('ship_id', $ship->id)
+            ->whereIn('communication_id', $trainingIDs)
+            ->where('is_done', false)
+            ->get();
 
         foreach ($trainings as $training) {
-            $service->remove($ship, $training);
+            $feedback = $incomingTrainings->firstWhere('communication_id', $training->communication_id)['feedback'];
+
+            $training->is_done = true;
+            $training->feedback = $feedback;
+
+            $training->save();
         }
     }
 
