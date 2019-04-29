@@ -19,15 +19,7 @@ class Training extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'date' => 'datetime'
+        'date' => 'datetime',
+        'is_done' => 'bool'
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (self $training) {
-            $training->communication_id = strtoupper(Uuid::uuid4());
-        });
-    }
 }
