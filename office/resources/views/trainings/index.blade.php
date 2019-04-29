@@ -22,7 +22,7 @@
                 <th>Ship</th>
                 <th>Date</th>
                 <th>Status</th>
-                <th>Feedback</th>
+                <th>Actions</th>
               </tr>
 
               @foreach ($trainings as $training)
@@ -38,7 +38,9 @@
                     <td><span class="badge bg-red">Not done</span></td>
                   @endif
 
-                  <td>{{ $training->feedback ?? '-' }}</td>
+                  <td>
+                    <a href="/trainings/{{ $training->id }}" class="btn btn-primary btn-xs">Show</a>
+                  </td>
 
                 </tr>
               @endforeach
@@ -50,3 +52,7 @@
 
   </div>
 @stop
+
+@section('css')
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+@endsection
