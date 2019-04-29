@@ -15,6 +15,12 @@ class TrainingController extends Controller
         return view('trainings.index')->with('trainings',  Training::all());
     }
 
+    public function show(Training $training)
+    {
+        return view('trainings.show')
+            ->with('training', $training);
+    }
+
     public function create()
     {
         $concepts = TrainingConcept::all();

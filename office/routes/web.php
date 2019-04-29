@@ -32,5 +32,6 @@ Route::prefix('/concepts')->group(function () {
 Route::prefix('/trainings')->group(function () {
     Route::get('/', 'TrainingController@index');
     Route::get('/create', 'TrainingController@create');
+    Route::get('/{training}', 'TrainingController@show');
     Route::post('/', 'TrainingController@store');
 });
