@@ -12,7 +12,13 @@
     <div class="col-md-10 col-md-offset-1">
       <div class="box">
         <div class="box-header">
-          <a href="/operating-hours/create" class="btn btn-success btn-xs">New</a>
+          <div class="button-container">
+            <a href="/operating-hours/create" class="btn btn-success btn-xs">New</a>
+            <a href="https://datastudio.google.com/s/jH6p6YVSSBA" target="_blank" class="btn btn-info btn-xs">
+              <span class="fas fa-external-link-alt"></span>
+              Ga naar rapport
+            </a>
+          </div>
         </div>
         <div class="box-body">
             <table class="table table-bordered table-striped">
@@ -44,4 +50,11 @@
 
 @section('css')
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <style>
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  </style>
 @endsection
