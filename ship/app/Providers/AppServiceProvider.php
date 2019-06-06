@@ -8,6 +8,7 @@ use App\CommunicationServiceContract;
 use Illuminate\Support\ServiceProvider;
 
 use GuzzleHttp\Client;
+use Google\Cloud\BigQuery\BigQueryClient;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,13 @@ class AppServiceProvider extends ServiceProvider
                     'Accept'       => 'application/json',
                     'Content-Type' => 'application/json',
                 ]
+            ]);
+        });
+
+        $this->app->bind(BigQueryClient::class, function () {
+            return new BigQueryClient([
+                'keyFilePath' => env('GCP_KEY_FILE_PATH'),
+                'projectId'   => 'wise-vim-242413'       ,
             ]);
         });
     }
