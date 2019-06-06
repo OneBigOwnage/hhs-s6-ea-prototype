@@ -117,7 +117,7 @@ return [
             'url'         => 'trainings',
             'icon'        => 'calendar-alt',
         ], [
-            'text'        => 'Draaiuren',
+            'text'        => 'Operating hours',
             'url'         => 'operating-hours',
             'icon'        => 'stopwatch',
         ],

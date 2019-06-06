@@ -109,16 +109,18 @@ return [
 
     'menu' => [
         [
+            'text' => 'Dashboard',
+            'url'  => 'dashboard',
+            'icon' => 'tachometer-alt',
+        ], [
             'text' => 'Ships',
             'url'  => 'ships',
             'icon' => 'ship',
-        ],
-        [
+        ], [
             'text'        => 'Library',
             'url'         => 'concepts',
             'icon'        => 'book',
-        ],
-        [
+        ], [
             'text'        => 'Trainings',
             'url'         => 'trainings',
             'icon'        => 'calendar',
