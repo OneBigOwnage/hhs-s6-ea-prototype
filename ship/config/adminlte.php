@@ -112,11 +112,14 @@ return [
             'text'        => 'Dashboard',
             'url'         => 'dashboard',
             'icon'        => 'tachometer-alt',
-        ],
-        [
+        ], [
             'text'        => 'Trainings',
             'url'         => 'trainings',
             'icon'        => 'calendar-alt',
+        ], [
+            'text'        => 'Draaiuren',
+            'url'         => 'operating-hours',
+            'icon'        => 'stopwatch',
         ],
     ],
 
