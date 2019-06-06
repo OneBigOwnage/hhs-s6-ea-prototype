@@ -16,8 +16,9 @@ class CreateOperatingHoursTable extends Migration
         Schema::create('operating_hours', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->string('device');
             $table->bigInteger('hours');
-            $table->date('reading_date');
+            $table->string('reading_date');
 
             $table->timestamps();
         });

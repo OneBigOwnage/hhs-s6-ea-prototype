@@ -8,7 +8,8 @@ use Illuminate\Support\Carbon;
 
 $factory->define(OperatingHours::class, function (Faker $faker) {
     return [
-        'hours'                => $faker->numberBetween(2500, 15000),
-        'reading_date'         => Carbon::now()->subDays($faker->numberBetween(1, 5)),
+        'device'       => $faker->jobTitle,
+        'hours'        => $faker->numberBetween(2500, 15000),
+        'reading_date' => Carbon::now()->subDays($faker->numberBetween(1, 5))->format('m/d/Y'),
     ];
 });

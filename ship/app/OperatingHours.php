@@ -21,6 +21,7 @@ class OperatingHours extends Model
      * @var array
      */
     protected $fillable = [
+        'device'      ,
         'hours'       ,
         'reading_date',
     ];
@@ -30,10 +31,7 @@ class OperatingHours extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'hours'        => 'integer',
-        'reading_date' => 'date'   ,
-    ];
+    protected $casts = [ 'hours' => 'integer' ];
 
     /**
      * The "booting" method of the model.
