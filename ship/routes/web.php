@@ -17,13 +17,15 @@ Route::get('/dashboard', 'Controller@dashboard');
 
 Route::get('/sync', 'CommunicationController@sync');
 
-Route::get('/operating-hours', 'OperatingHoursController@index');
-Route::get('/operating-hours/create', 'OperatingHoursController@create');
-Route::post('/operating-hours', 'OperatingHoursController@store');
+Route::prefix('/operating-hours')->group(function () {
+    Route::get ('/'      , 'OperatingHoursController@index' );
+    Route::get ('/create', 'OperatingHoursController@create');
+    Route::post('/'      , 'OperatingHoursController@store' );
+});
 
 Route::prefix('/trainings')->group(function () {
-    Route::get('/', 'TrainingController@index');
-    Route::get('/{training}', 'TrainingController@show');
-    Route::get('/{training}/complete', 'TrainingController@showComplete');
-    Route::post('/{training}/complete', 'TrainingController@complete');
+    Route::get ('/'                   , 'TrainingController@index'       );
+    Route::get ('/{training}'         , 'TrainingController@show'        );
+    Route::get ('/{training}/complete', 'TrainingController@showComplete');
+    Route::post('/{training}/complete', 'TrainingController@complete'    );
 });
